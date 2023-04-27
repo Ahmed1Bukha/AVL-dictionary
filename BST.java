@@ -86,8 +86,12 @@ public class BST<T extends Comparable<T>> extends BinaryTree<T> {
              else prev.right = node;
         }
         else if (root != null)
-             throw new java.util.NoSuchElementException("el " + el + " is not in the tree");
-        else 
+          try {
+               throw new WordNotFoundException("el " + el + " is not in the tree");
+          } catch (WordNotFoundException e) {
+               e.printStackTrace();
+          }
+     else 
             throw new UnsupportedOperationException("the tree is empty");
     }
     public void deleteByMerging(T el) {
@@ -134,6 +138,10 @@ public class BST<T extends Comparable<T>> extends BinaryTree<T> {
     public void preorderTraversal(){
         preorderTraversal(root);
     }
+
+    public String findSimilarPreOrder(String word){
+     return findSimilarPreOrder(root,word);
+ }
 
     public void postorderTraversal(){
         postorderTraversal(root);

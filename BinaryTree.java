@@ -1,4 +1,7 @@
 import java.util.Queue;
+
+import javax.swing.text.html.HTMLDocument.RunElement;
+
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -201,6 +204,61 @@ public class BinaryTree<T extends Comparable<T>> {
         preorderTraversal(node.left); 
         preorderTraversal(node.right); 
     } 
+
+
+    public String findSimilarPreOrder(BTNode root,String word){     
+      return findSimilarPreOrder(root,word,"");  
+  } 
+
+  protected String findSimilarPreOrder(BTNode node,String word,String similars){ 
+      if (node == null) 
+          return similars; 
+      int numberCharNode = ((String) node.data).split("").length;
+      int numberCharWord = word.split("").length;
+      
+      if(Math.abs(numberCharNode - numberCharWord)<=1){
+         boolean isSimilar = checkSimilar(word, node.data.toString());
+         if(isSimilar){
+            if(similars.isEmpty()){
+               similars = node.data.toString();
+            }
+            else{
+               similars = similars+","+node.data;
+            }
+            
+         }
+
+      }
+      similars = findSimilarPreOrder(node.left,word,similars); 
+
+      similars = findSimilarPreOrder(node.right,word,similars); 
+      return similars;
+  }
+
+  protected boolean checkSimilar(String word,String nodeData){
+   if(word.equals(nodeData)){
+      return false;
+   }
+   int unSimilarCharCount=0;
+   int wordLength =  word.split("").length;
+   int nodeLength = nodeData.split("").length;
+
+   int numberIterate = wordLength > nodeLength ? nodeLength : wordLength;
+
+   for(int i=0; i< numberIterate;i++){
+      Character charWord = word.charAt(i);
+      Character charNode = nodeData.charAt(i);
+      if(!charNode.equals(charWord)){
+         unSimilarCharCount++;
+      }
+      if(unSimilarCharCount>1 || (unSimilarCharCount==1 && wordLength!= nodeLength)){
+         return false;
+      }
+   }
+   return true;
+   
+   
+  }
   
     public boolean search(T key){
        if(root == null)

@@ -159,5 +159,10 @@ public class AVLTree<T extends Comparable<T>> extends BST<T> {
    public void levelOrderTraversal(){
 	   levelOrderTraversal(root);
    }
+
+   public String findSimilars(String word){
+      String wordString=this.findSimilarPreOrder(word);
+      return wordString;
+   }
       
 }
