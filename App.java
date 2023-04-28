@@ -30,7 +30,7 @@ public class App {
         System.out.print("remove word: ");
         String removeWord = kb.nextLine();
         dictionary.deleteWord(removeWord);
-        System.out.println("word removed successfully");
+        
         
         System.out.print("Search for similar words: ");
         String wordSimilar = kb.nextLine();
@@ -42,6 +42,8 @@ public class App {
         if(isSave.equalsIgnoreCase("Y")){
             System.out.print("Enter filename: ");
             String fileSaveName = kb.nextLine();
+            dictionary.saveFile(fileSaveName);
+            System.out.println("Done saving the file.");
         }
      
        

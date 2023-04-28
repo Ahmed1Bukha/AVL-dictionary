@@ -2,6 +2,7 @@ import java.util.Queue;
 
 import javax.swing.text.html.HTMLDocument.RunElement;
 
+import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -114,6 +115,40 @@ public class BinaryTree<T extends Comparable<T>> {
         else if(parentNode.right == currentNode)
             parentNode.right = null;
     } 
+
+
+
+    public void writeToFileLevelOrderTraversal(String fileName){
+      writeToFileLevelOrderTraversal(root,fileName);
+    }
+
+
+    public void writeToFileLevelOrderTraversal(BTNode root,String fileName){
+    try{
+      if(root == null)
+         return;
+      FileWriter fileWriter = new FileWriter(fileName,true);
+
+      Queue<BTNode> queue = new LinkedList<BTNode>();
+      BTNode node = root;
+      queue.add(node); 
+      while(! queue.isEmpty()){
+     
+ 
+      fileWriter.write(node.data.toString()+"\n");
+      node = queue.poll();
+      if(node.left != null)
+         queue.add(node.left);
+      if(node.right != null)
+         queue.add(node.right);
+   } 
+   fileWriter.close();
+
+    }
+    catch(Exception e){
+      System.out.println("Something went wrong with the file writing");
+    }
+   }
   
     public void levelOrderTraversal(){ // BreadthFirstTraversal
       levelOrderTraversal(root);
@@ -206,9 +241,7 @@ public class BinaryTree<T extends Comparable<T>> {
     } 
 
 
-    public String findSimilarPreOrder(BTNode root,String word){     
-      return findSimilarPreOrder(root,word,"");  
-  } 
+ 
 
   protected String findSimilarPreOrder(BTNode node,String word,String similars){ 
       if (node == null) 

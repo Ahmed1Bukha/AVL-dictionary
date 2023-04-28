@@ -11,12 +11,8 @@ public class Dictionary {
 
     public Dictionary(String firsrWord){
         instantiateTrees();
-        try {
-            addWord(firsrWord);
-        } catch (WordAlreadyExistsException e) {
-        
-            e.printStackTrace();
-        }
+        addWord(firsrWord);
+         
     }
 
     public Dictionary(File wordsFile) throws WordAlreadyExistsException, FileNotFoundException{
@@ -38,26 +34,30 @@ public class Dictionary {
     public void addWord(File myFile) throws WordAlreadyExistsException, FileNotFoundException{
 
         Scanner kb = new Scanner(myFile);
+        String word="";
         while(kb.hasNextLine()){
-            String word = kb.nextLine();
-            System.out.println(word);
-            int treeNumber =getTreeNumber(word);
-            
-       
-
+             word = kb.nextLine();
     
-        trees[treeNumber].insertAVL(word);
+            addWord(word);
         
         }
+      
+           
+            addWord(word);
+        
        
       
     }
-    public void addWord(String word) throws WordAlreadyExistsException{
+    public void addWord(String word) {
         int treeNumber =getTreeNumber(word);
         boolean isExsits=  trees[treeNumber].search(word);
 
       if(isExsits){
-        throw new WordAlreadyExistsException("Word is already added to the dictionary!");
+        try {
+            throw new WordAlreadyExistsException("Word is already added to the dictionary!");
+        } catch (WordAlreadyExistsException e) {
+            e.printStackTrace();
+        }
       }
       else{
         trees[treeNumber].insertAVL(word);
@@ -120,6 +120,14 @@ public class Dictionary {
         }
         similars = tempoSimilar.split(",");
         return similars;
+    }
+
+
+    public void saveFile(String fileName){
+        for(int i =0; i<trees.length; i++){
+            trees[i].writeToFileLevelOrderTraversal(fileName);
+            System.out.println(i);
+        }
     }
 
 
