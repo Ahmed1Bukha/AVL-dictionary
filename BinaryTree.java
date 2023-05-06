@@ -269,6 +269,8 @@ public class BinaryTree<T extends Comparable<T>> {
   }
 
   protected boolean checkSimilar(String word,String nodeData){
+   int offsetWord = 0;
+   int offsetNode = 0;
    if(word.equals(nodeData)){
       return false;
    }
@@ -278,17 +280,46 @@ public class BinaryTree<T extends Comparable<T>> {
 
    int numberIterate = wordLength > nodeLength ? nodeLength : wordLength;
 
-   for(int i=0; i< numberIterate;i++){
-      Character charWord = word.charAt(i);
-      Character charNode = nodeData.charAt(i);
+
+   int j=0;
+   while(j< numberIterate){
+      Character charWord = word.charAt(j+offsetWord);
+      Character charNode = nodeData.charAt(j+offsetNode);
       if(!charNode.equals(charWord)){
-         unSimilarCharCount++;
+         if(wordLength!= nodeLength &&  wordLength>nodeLength && offsetWord==0){
+            offsetWord= offsetWord+1;
+            j--;
+         }
+         else if(wordLength!= nodeLength &&  nodeLength>wordLength&& offsetNode==0){
+            offsetNode = offsetNode+1;
+            j--;
+         }
+   
+            unSimilarCharCount++;
+            
+     
+         
       }
-      if(unSimilarCharCount>1 || (unSimilarCharCount==1 && wordLength!= nodeLength)){
+      if(unSimilarCharCount>1 ){
          return false;
       }
+      j++;
    }
    return true;
+
+   // for(int i=0; i< numberIterate;i++){
+   //    Character charWord = word.charAt(i);
+   //    Character charNode = nodeData.charAt(i);
+   //    if(!charNode.equals(charWord)){
+        
+   //       unSimilarCharCount++;
+
+   //    }
+   //    if(unSimilarCharCount>1 || (unSimilarCharCount==1 && wordLength!= nodeLength)){
+   //       return false;
+   //    }
+   // }
+   // return true;
    
    
   }

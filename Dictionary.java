@@ -39,11 +39,11 @@ public class Dictionary {
              word = kb.nextLine();
     
             addWord(word);
-        
+            System.out.println(word);
         }
       
            
-            addWord(word);
+            
         
        
       
@@ -51,7 +51,7 @@ public class Dictionary {
     public void addWord(String word) {
         int treeNumber =getTreeNumber(word);
         boolean isExsits=  trees[treeNumber].search(word);
-
+            System.out.println(word);
       if(isExsits){
         try {
             throw new WordAlreadyExistsException("Word is already added to the dictionary!");
@@ -103,7 +103,7 @@ public class Dictionary {
     }
 
     public String [] findSimilar (String word) { //Complete stuff
-        String [] similars= {""};
+        String [] similars= {};
         String tempoSimilar="";
         for(int i =0; i< trees.length; i++){
 

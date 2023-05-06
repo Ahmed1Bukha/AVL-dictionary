@@ -16389,6 +16389,7 @@ paid
 pail
 pain
 paine
+painter
 painful
 painstaking
 paint
@@ -17473,6 +17474,7 @@ polecat
 polemic
 police
 policeman
+pointer
 policemen
 policy
 polio
@@ -17892,6 +17894,7 @@ pristine
 pritchard
 privacy
 private
+printer
 privet
 privilege
 privy
@@ -18224,6 +18227,7 @@ punic
 punish
 punitive
 punk
+punter
 punky
 punster
 punt
