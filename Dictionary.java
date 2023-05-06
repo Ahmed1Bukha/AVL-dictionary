@@ -3,21 +3,22 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Dictionary {
     private File wordsFile;
-    private AVLTree<String>[] trees = new AVLTree[26]; //Number of letters in English.
-    private String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y" , "z"};
+    AVLTree<String> bigTree = new AVLTree<String>();
+    // private AVLTree<String>[] trees = new AVLTree[26]; //Number of letters in English.
+    // private String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y" , "z"};
     public Dictionary(){
-        instantiateTrees();
+        // instantiateTrees();
     }
 
     public Dictionary(String firsrWord){
-        instantiateTrees();
+        // instantiateTrees();
         addWord(firsrWord);
          
     }
 
     public Dictionary(File wordsFile) throws WordAlreadyExistsException, FileNotFoundException{
         this.wordsFile = wordsFile;
-        instantiateTrees();
+        // instantiateTrees();
      
         try {
             addWord(wordsFile);
@@ -49,8 +50,8 @@ public class Dictionary {
       
     }
     public void addWord(String word) {
-        int treeNumber =getTreeNumber(word);
-        boolean isExsits=  trees[treeNumber].search(word);
+        // int treeNumber =getTreeNumber(word);
+        boolean isExsits= bigTree.search(word);
             System.out.println(word);
       if(isExsits){
         try {
@@ -60,54 +61,54 @@ public class Dictionary {
         }
       }
       else{
-        trees[treeNumber].insertAVL(word);
+       bigTree.insertAVL(word);
       }
     }
 
 
 
     public boolean findWord(String word){ // O(1)+ O(log n).
-        int treeNumber = getTreeNumber(word); 
-        boolean isFound = this.trees[treeNumber].search(word);
+        // int treeNumber = getTreeNumber(word); 
+        boolean isFound =bigTree.search(word);
         return isFound;
     }
 
-    private int getTreeNumber(String word){ //O(1)
-        String charaString = word.split("")[0];
-        int treeNumber=0;
+    // private int getTreeNumber(String word){ //O(1)
+    //     String charaString = word.split("")[0];
+    //     int treeNumber=0;
 
-        for(int i=0; i<this.letters.length; i++){
-            if(charaString.equals(letters[i])){
-                treeNumber = i;
-                break;
-            }
-        }
-        return treeNumber;
-
-
+    //     for(int i=0; i<this.letters.length; i++){
+    //         if(charaString.equals(letters[i])){
+    //             treeNumber = i;
+    //             break;
+    //         }
+    //     }
+    //     return treeNumber;
 
 
-    }
+
+
+    // }
 
 	public void deleteWord(String word) throws WordNotFoundException{
-        int treeNumber = getTreeNumber(word);
-        trees[treeNumber].deleteAVL(word);
+        // int treeNumber = getTreeNumber(word);
+        bigTree.deleteAVL(word);
     }
 
 
 
-    private void  instantiateTrees(){
-        for(int i=0; i< this.trees.length; i++ ){
-            trees[i] = new AVLTree<String>();
-        }
-    }
+    // private void  instantiateTrees(){
+    //     for(int i=0; i< this.trees.length; i++ ){
+    //         trees[i] = new AVLTree<String>();
+    //     }
+    // }
 
     public String [] findSimilar (String word) { //Complete stuff
         String [] similars= {};
         String tempoSimilar="";
-        for(int i =0; i< trees.length; i++){
+      
 
-            String temp=trees[i].findSimilarPreOrder(word);
+            String temp=bigTree.findSimilarPreOrder(word);
             if(!temp.isEmpty()){
                 
                 if(tempoSimilar.isEmpty()){
@@ -117,17 +118,17 @@ public class Dictionary {
                     tempoSimilar = tempoSimilar+","+temp;
                 }
             }
-        }
+        
         similars = tempoSimilar.split(",");
         return similars;
     }
 
 
     public void saveFile(String fileName){
-        for(int i =0; i<trees.length; i++){
-            trees[i].writeToFileLevelOrderTraversal(fileName);
-            System.out.println(i);
-        }
+    
+          bigTree.writeToFileLevelOrderTraversal(fileName);
+           
+      
     }
 
 
