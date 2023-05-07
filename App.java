@@ -25,7 +25,7 @@ public class App {
         System.out.print("add new word: ");
         String newWord = kb.nextLine();
         dictionary.addWord(newWord);
-        System.out.println("word added successfully.");
+        
 
         System.out.print("remove word: ");
         String removeWord = kb.nextLine();

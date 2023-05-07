@@ -21,7 +21,7 @@ public class Dictionary {
         // instantiateTrees();
      
         try {
-            addWord(wordsFile);
+            addWord(this.wordsFile);
         } catch (WordAlreadyExistsException e) {
         
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class Dictionary {
              word = kb.nextLine();
     
             addWord(word);
-            System.out.println(word);
+            System.out.println("Adding: "+word);
         }
       
            
@@ -49,25 +49,29 @@ public class Dictionary {
        
       
     }
-    public void addWord(String word) {
+    public void addWord(String word) { // O(log n).
         // int treeNumber =getTreeNumber(word);
         boolean isExsits= bigTree.search(word);
-            System.out.println(word);
+         
       if(isExsits){
         try {
             throw new WordAlreadyExistsException("Word is already added to the dictionary!");
         } catch (WordAlreadyExistsException e) {
-            e.printStackTrace();
+            
         }
       }
       else{
-       bigTree.insertAVL(word);
+     System.out.println("word added successfully.");
+      bigTree.insertAVL(word);
+      
       }
+
+
     }
 
 
 
-    public boolean findWord(String word){ // O(1)+ O(log n).
+    public boolean findWord(String word){ // O(log n).
         // int treeNumber = getTreeNumber(word); 
         boolean isFound =bigTree.search(word);
         return isFound;
@@ -90,7 +94,7 @@ public class Dictionary {
 
     // }
 
-	public void deleteWord(String word) throws WordNotFoundException{
+	public void deleteWord(String word) throws WordNotFoundException{ // O(log n).
         // int treeNumber = getTreeNumber(word);
         bigTree.deleteAVL(word);
     }
@@ -103,7 +107,7 @@ public class Dictionary {
     //     }
     // }
 
-    public String [] findSimilar (String word) { //Complete stuff
+    public String [] findSimilar (String word) { //O(log n * m)
         String [] similars= {};
         String tempoSimilar="";
       
@@ -124,7 +128,7 @@ public class Dictionary {
     }
 
 
-    public void saveFile(String fileName){
+    public void saveFile(String fileName){ // O(n)
     
           bigTree.writeToFileLevelOrderTraversal(fileName);
            

@@ -133,10 +133,11 @@ public class BinaryTree<T extends Comparable<T>> {
       BTNode node = root;
       queue.add(node); 
       while(! queue.isEmpty()){
-     
+      node = queue.poll();
  
       fileWriter.write(node.data.toString()+"\n");
-      node = queue.poll();
+     
+      
       if(node.left != null)
          queue.add(node.left);
       if(node.right != null)

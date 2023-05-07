@@ -1,0 +1,8 @@
+Dictionary(): O(1).
+Dictionary(String firsrWord): O(log n).
+addWord(String word) : O(log n).
+addWord(File file) : O(log n).
+findWord(String word): O(log n).
+deleteWord(String word): O(log n).
+[] findSimilar (String word): O(n * m)  |N is the number of words and M is the length of the word.|  // That's because the program is traveling throught each node.
+saveFile(String fileName): O(n).
