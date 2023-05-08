@@ -140,6 +140,10 @@ public class BST<T extends Comparable<T>> extends BinaryTree<T> {
     }
 
     public String findSimilarPreOrder(String word){
+
+     
+
+
      return findSimilarPreOrder(root,word,"");
  }
 

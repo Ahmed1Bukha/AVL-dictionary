@@ -87,7 +87,7 @@ public class Dictionary {
 
 
 
-    public String [] findSimilar (String word) { //O(log n * m)
+    public String [] findSimilar (String word) { //O( n * m)
         String [] similars= {};
         String tempoSimilar="";
       
