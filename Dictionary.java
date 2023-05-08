@@ -4,21 +4,20 @@ import java.util.Scanner;
 public class Dictionary {
     private File wordsFile;
     AVLTree<String> bigTree = new AVLTree<String>();
-    // private AVLTree<String>[] trees = new AVLTree[26]; //Number of letters in English.
-    // private String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y" , "z"};
+   
     public Dictionary(){
-        // instantiateTrees();
+    
     }
 
     public Dictionary(String firsrWord){
-        // instantiateTrees();
+
         addWord(firsrWord);
          
     }
 
     public Dictionary(File wordsFile) throws WordAlreadyExistsException, FileNotFoundException{
         this.wordsFile = wordsFile;
-        // instantiateTrees();
+       
      
         try {
             addWord(this.wordsFile);
@@ -50,14 +49,15 @@ public class Dictionary {
       
     }
     public void addWord(String word) { // O(log n).
-        // int treeNumber =getTreeNumber(word);
+       
+        
         boolean isExsits= bigTree.search(word);
          
       if(isExsits){
         try {
             throw new WordAlreadyExistsException("Word is already added to the dictionary!");
         } catch (WordAlreadyExistsException e) {
-            
+            System.out.println(e);
         }
       }
       else{
@@ -72,40 +72,20 @@ public class Dictionary {
 
 
     public boolean findWord(String word){ // O(log n).
-        // int treeNumber = getTreeNumber(word); 
+       
         boolean isFound =bigTree.search(word);
         return isFound;
     }
 
-    // private int getTreeNumber(String word){ //O(1)
-    //     String charaString = word.split("")[0];
-    //     int treeNumber=0;
 
-    //     for(int i=0; i<this.letters.length; i++){
-    //         if(charaString.equals(letters[i])){
-    //             treeNumber = i;
-    //             break;
-    //         }
-    //     }
-    //     return treeNumber;
-
-
-
-
-    // }
 
 	public void deleteWord(String word) throws WordNotFoundException{ // O(log n).
-        // int treeNumber = getTreeNumber(word);
+       
         bigTree.deleteAVL(word);
     }
 
 
 
-    // private void  instantiateTrees(){
-    //     for(int i=0; i< this.trees.length; i++ ){
-    //         trees[i] = new AVLTree<String>();
-    //     }
-    // }
 
     public String [] findSimilar (String word) { //O(log n * m)
         String [] similars= {};

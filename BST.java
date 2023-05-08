@@ -90,7 +90,7 @@ public class BST<T extends Comparable<T>> extends BinaryTree<T> {
           try {
                throw new WordNotFoundException(  el + " is not in the tree");
           } catch (WordNotFoundException e) {
-               e.printStackTrace();
+               System.out.println(e);
           }
    
     }
